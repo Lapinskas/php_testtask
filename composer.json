@@ -1,0 +1,20 @@
+{
+    "name": "vladas/php-testtask",
+    "authors": [
+        {
+            "name": "Vladas Lapinskas",
+            "email": "vlad.lapinskas@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.12",
+        "zircote/swagger-php" : "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+        }
+    }
+}
