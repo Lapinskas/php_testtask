@@ -5,6 +5,7 @@ namespace Vladas\Docs;
 use \Psr\Container\ContainerInterface as Container;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Vladas\Docs\Document as Document;
 
 class DocsController {
     protected $container;
@@ -16,8 +17,10 @@ class DocsController {
    
     public function getDoc(Request $request, Response $response, $args) : Response
     {
+        $doc = Document::create();
+
         return $response->withJson([
-            'document' => $args['id']
+            'document' => get_object_vars($doc)
         ], 200);
     }
     

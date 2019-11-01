@@ -3,26 +3,28 @@
 namespace Vladas\Docs;
 
 class Document {
-    
-    private $document;
-    
-    public function __construct()
-    {
-        $this->document = [
-            "id" => "some-uuid-string",
-            "status" => "draft|published",
-            "createAt" => "iso-8601 date time with time zone",
-            "modifyAt" => "iso-8601 date time with time zone"
-        ];
-    }
+    public $id;
+    public $status;
+    public $payload;
+    public $createAt;
+    public $modifyAt;
+    private $created;
+    private $modified;
 
-    public function find() : bool
+
+    public static function create() : Document
     {
-        return true;
-    }
-    
-    public function get() : array
-    {
-        return $this->document;
+        $doc = new Document();
+
+        $doc->id = '718ce61b-a669-45a6-8f31-32ba41f94784';
+        $doc->status = 'draft';
+        $doc->payload = [];
+        $doc->created = $doc->modified = time();
+        
+        $date = new \DateTime();
+        $date->setTimestamp($doc->created);
+        $doc->createAt = $doc->modifyAt = $date->format('c');
+
+        return $doc;
     }
 }
