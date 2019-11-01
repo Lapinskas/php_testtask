@@ -1,21 +1,25 @@
 <?php
 
-namespace Vladas\Docs;
+namespace Vladas;
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Vladas\Docs\Document as Document;
 
 /**
- * DocsApp is the main application class
+ * App is the main application class
  * 
- * This class sets all routes and main execution logic using helper classes
+ * This class sets container and all routes
  * 
  * @author Vladas Lapinskas <vlad.lapinskas@gmail.com>
  * @version '0.1'
  * 
  */
-class DocsApp
+class App
 {   
+    // API version, part of the URI path
+    const API_VERSION = "v1";   
+    
     /**
      * Stores an instance of the Slim application.
      *
@@ -29,8 +33,6 @@ class DocsApp
      * @var Vladas\Docs\Document
      */    
     private $doc;
-
-    const VERSION = "v1";
 
     /**
      * Creates a new instance of Slim Application

@@ -13,7 +13,7 @@ namespace Vladas\Docs;
 /**
  * @OA\Info(title="Docs API", version="1.0")
  */
-$this->app->group('/api/' . $this::VERSION, function(\Slim\App $app) {
+$this->app->group('/api/' . $this::API_VERSION, function(\Slim\App $app) {
     /**
      * @OA\Post(
      *     path="/api/v1/document/",

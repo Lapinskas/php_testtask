@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Vladas\\Docs\\" : "src"
+            "Vladas\\" : "src",
+            "Vladas\\Docs\\" : "src/Documents"
         }
     }
 }
