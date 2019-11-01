@@ -34,7 +34,6 @@ class DocsApp
      */    
     private $doc;
 
-
     const VERSION = "v1";
 
     /**
@@ -68,10 +67,7 @@ class DocsApp
              *     @OA\Response(response="201", description="Document created"),
              * )
              */           
-            $app->post('/document/', function (Request $request, Response $response, $args) {
-                return $response->withJson([
-                ], 201);
-            });
+            $app->post('/document/', DocsController::class . ':createDoc');
 
             /**
              * @OA\Get(
@@ -80,14 +76,8 @@ class DocsApp
              *     @OA\Response(response="200", description="Document found"),
              *     @OA\Response(response="404", description="Document not found") 
              * )
-             */           
-            $app->get('/document/{id}', function (Request $request, Response $response, $args) {
-                $doc = $this->get('doc');
-                $res = $doc->find($args);
-                return $response->withJson([
-                    'document' => $doc->get()
-                ], $res ? 200 : 404);
-            });
+             */            
+            $app->get('/document/{id}', DocsController::class . ':getDoc');
 
             /**
              * @OA\Patch(
@@ -97,11 +87,7 @@ class DocsApp
              *     @OA\Response(response="404", description="Document not found") 
              * )
              */           
-            $app->patch('/document/{id}', function (Request $request, Response $response, $args) {
-                $id = $args['id'] ?? null;
-                return $response->withJson([
-                ], 200);
-            });
+            $app->patch('/document/{id}', DocsController::class . ':updateDoc');
 
             /**
              * @OA\Post(
@@ -111,11 +97,7 @@ class DocsApp
              *     @OA\Response(response="404", description="Document not found") 
              * )
              */           
-            $app->post('/document/{id}/publish', function (Request $request, Response $response, $args) {
-                $id = $args['id'] ?? null;
-                return $response->withJson([
-                ], 200);
-            });
+            $app->post('/document/{id}/publish', DocsController::class . ':publishDoc');
 
             /**
              * @OA\Get(
@@ -124,21 +106,8 @@ class DocsApp
              *     @OA\Response(response="200", description="Documents found"),
              *     @OA\Response(response="404", description="Documents not found") 
              * )
-             */           
-            $app->get('/document/', function (Request $request, Response $response, $args) {
-                $pagination = array_merge([
-                        'page' => 1,
-                        'perPage' => 20
-                    ],
-                    $request->getQueryParams()
-                );
-                
-                $pagination['total'] = 1;
-
-                return $response->withJson([
-                    'pagination' => $pagination
-                ], 200);
-            });
+             */
+            $app->get('/document/', DocsController::class . ':getAllDocs');
         });
     }
 
