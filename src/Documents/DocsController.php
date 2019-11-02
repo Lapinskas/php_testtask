@@ -9,7 +9,7 @@ use Vladas\Docs\Document as Document;
 
 class DocsController {
     protected $container;
-    
+
     public function __construct(Container $container)
     {
        $this->container = $container;
@@ -17,11 +17,11 @@ class DocsController {
    
     public function getDoc(Request $request, Response $response, $args) : Response
     {
-        $doc = Document::create();
-
+        $doc = $this->container->get('doc')->create()->read($args['id']);
+        
         return $response->withJson([
             'document' => get_object_vars($doc)
-        ], 200);
+        ], (isset($doc->id)) ? 200 : 404);
     }
     
     public function getAllDocs(Request $request, Response $response, $args) : Response
@@ -42,11 +42,11 @@ class DocsController {
     
     public function createDoc(Request $request, Response $response, $args) : Response
     {
-        $data = $request->getParsedBody();
+        $doc = $this->container->get('doc')->create()->save();
         
         return $response->withJson([
-            'document' => $data
-        ], 201);
+            'document' => $doc
+        ], (isset($doc->id)) ? 201 : 400);
     }
     
     public function updateDoc(Request $request, Response $response, $args) : Response
@@ -61,12 +61,10 @@ class DocsController {
     
     public function publishDoc(Request $request, Response $response, $args) : Response
     {
-        $data = $request->getParsedBody();
+        $doc = $this->container->get('doc')->publish($args['id']);
         
         return $response->withJson([
-            'id' => $args['id'],
-            'document' => $data,
-            'publish' => true
-        ], 200);
+            'document' => $doc
+        ], (isset($doc->id)) ? 200 : 404);
     }
 }

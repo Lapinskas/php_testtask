@@ -19,6 +19,7 @@ $this->app->group('/api/' . $this::API_VERSION, function(\Slim\App $app) {
      *     path="/api/v1/document/",
      *     summary="Create draft of the document",
      *     @OA\Response(response="201", description="Document created"),
+     *     @OA\Response(response="400", description="Document creation error"),
      * )
      */           
     $app->post('/document/', DocsController::class . ':createDoc');
@@ -48,7 +49,7 @@ $this->app->group('/api/' . $this::API_VERSION, function(\Slim\App $app) {
      *     path="/api/v1/document/{id}/publish",
      *     summary="Publish draft of the document",
      *     @OA\Response(response="200", description="Document published"),
-     *     @OA\Response(response="404", description="Document not found") 
+     *     @OA\Response(response="400", description="Document not found") 
      * )
      */           
     $app->post('/document/{id}/publish', DocsController::class . ':publishDoc');

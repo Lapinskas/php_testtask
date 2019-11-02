@@ -16,26 +16,26 @@ $db->setAttribute(
     PDO::ERRMODE_EXCEPTION
 );
 
-$db->prepare(
+$db->query(
     'CREATE DATABASE IF NOT EXISTS `' . $_ENV['MYSQL_DATABASE'] . '`'
-)->execute();
+);
 
-$db->prepare(
+$db->query(
     'DROP USER IF EXISTS `' . $_ENV['MYSQL_USER'] . '`@`' . $_ENV['MYSQL_HOST'] . '`'
-)->execute();
+);
 
-$db->prepare(
+$db->query(
     'DROP USER IF EXISTS `' . $_ENV['MYSQL_USER'] . '`@`' . $_ENV['MYSQL_HOST'] . '`'
-)->execute();
+);
 
-$db->prepare(
+$db->query(
     'CREATE USER `' . $_ENV['MYSQL_USER'] . '`@`' . $_ENV['MYSQL_HOST'] . '` IDENTIFIED BY \'' . $_ENV['MYSQL_PASSWORD'] . '\''
-)->execute();
+);
 
-$db->prepare(
+$db->query(
     'GRANT ALL PRIVILEGES ON `' . $_ENV['MYSQL_DATABASE'] . '`.* TO `' . $_ENV['MYSQL_USER'] . '`@`' . $_ENV['MYSQL_HOST'] . '`'
-)->execute();
+);
 
-$db->prepare(
+$db->query(
     'FLUSH PRIVILEGES'
-)->execute();
+);

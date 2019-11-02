@@ -20,20 +20,12 @@ class App
     // API version, part of the URI path
     const API_VERSION = "v1";   
     
-    /**
-     * Stores an instance of the Slim application.
-     *
-     * @var \Slim\App
-     */
+    // @var \Slim\App
     private $app;
-    
-    /**
-     * Stores an instance of the Docs
-     *
-     * @var Vladas\Docs\Document
-     */    
-    private $doc;
 
+    // @var Vladas\Docs\Document    
+    private $doc;
+  
     /**
      * Creates a new instance of Slim Application
      * Sets all routes
